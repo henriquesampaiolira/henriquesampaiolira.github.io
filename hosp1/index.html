@@ -6,50 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primeiro Game</title>
     <style>
-      .imagemGoogle{
-            position: relative;
-            top: 200px;
-            left: 200px;
-            width: 300px;
-            /* Para deixar o jogo mais desafiante, mude o tempo de 5s para 3s do animation */
-            animation: andaBoi 5s infinite;
-            animation-direction: alternate;
+      #image{
+            position: absolute;
+
+            width: 20px;
         }
-        @keyframes andaBoi{
-            0%{
-                transform: translate(0px, 0px);
-            }
-            25%{
-                transform: translate(-700px, -500px);
-            }
-            50%{
-                transform: translate(1000px, 300px);
-            }
-            75%{
-                transform: translate(250px, 250px);
-            }
-            100%{
-                transform: translate(-500px, -600px);
-            }
-        }
-        p{
+        div{
             text-align: center;
         }
+        input{
+            width: 215px;
+        }
     </style>
+    <script>
+        function pontos(obj, v){
+            obj.innerHTML=v;
+        }
+        function move(){
+            var obj=document.getElementById("image");
+            obj.style.left=(Math.random()*1200) + "px";
+            obj.style.top=(Math.random()*600) + "px";
+        }
+        function iniciar(){
+            var x=document.getElementById("valor").value;
+            console.log(x);
+            setInterval(move, x);
+        }
+        function reset(){
+            document.location.reload(true);
+        }
+        function addEventos(){
+            var obj=document.getElementById("image");
+            var ini=document.getElementsByTagName("button")[0];
+            var res=document.getElementsByTagName("button")[1];
+            var aumVel=document.getElementsByTagName("button")[1];
+            var dimVel=document.getElementsByTagName("button")[2];
+            var v=0
+            obj.addEventListener("click", function(event){
+                pontos(document.getElementById("text"), "Você tem " + (v+=1) + " pontos");
+            });
+            ini.addEventListener("click", iniciar);
+            res.addEventListener("click", reset);
+            // obj.addEventListener("mouseover", function(event){
+            //     move(obj, (Math.random()*600) + "px", (Math.random()*1200) + "px");
+            // })
+        }
+        
+        window.addEventListener("load", addEventos);
+
+    </script>
 </head>
 <body>
-    <img class="imagemGoogle" onclick="diminui()" src="https://cdn1.iconfinder.com/data/icons/fs-icons-ubuntu-by-franksouza-/512/google-chrome.png">
-    <p><strong>Tente clicar na imagem.<br>BOA SORTE!!!</strong></p>
-    <script>
-        var x = 100;
-        var y = 0;
-      function diminui(){
-        x += 50;
-        y += 1;
-        console.log("Você está com " + y + " pontos.");
-        document.getElementsByTagName("p")[0].innerText="Você está com " + y + " pontos." ;
-        // document.getElementsByTagName("p")[0].style.fontSize=x+"px";
-      }
-    </script>
+    <img id="image" src="https://cdn1.iconfinder.com/data/icons/fs-icons-ubuntu-by-franksouza-/512/google-chrome.png">
+    <div>
+        <p id="text" ><strong>Tente clicar na imagem.<br>BOA SORTE!!!</strong></p>
+        <input id="valor" type="text" placeholder= "Digite em milissegundo.Ex:1000=1s">
+        <button>Iniciar</button>
+        <button>Resetar</button>
+    </div>
+
 </body>
 </html>
