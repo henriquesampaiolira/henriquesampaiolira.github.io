@@ -29,6 +29,11 @@
             obj.style.left=(Math.random()*1200) + "px";
             obj.style.top=(Math.random()*600) + "px";
         }
+        function tentaNao(){
+            var obj=document.getElementById("image");
+            obj.style.left=(Math.random()*1200) + "px";
+            obj.style.top=(Math.random()*600) + "px";
+        }
         function iniciar(){
             var x=document.getElementById("valor").value;
             console.log(x);
@@ -44,9 +49,11 @@
             document.getElementById("image").addEventListener("click", function(event){
                 pontos(document.getElementById("text"), "Você tem " + (v+=1) + " pontos");
             });
+            document.getElementById("image").addEventListener("mouseover", tentaNao);
             document.getElementsByTagName("button")[0].addEventListener("click", iniciar);
             document.getElementsByTagName("button")[2].addEventListener("click", reset);
             document.getElementsByTagName("button")[1].addEventListener("click", parar);
+
             // obj.addEventListener("mouseover", function(event){
             //     move(obj, (Math.random()*600) + "px", (Math.random()*1200) + "px");
             // })
